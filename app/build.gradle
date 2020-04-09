@@ -42,6 +42,8 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    api "com.google.dagger:dagger:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
     api "com.google.dagger:dagger-android:$rootProject.dagger_version"
     api "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
