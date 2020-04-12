@@ -4,8 +4,8 @@ import java.util.*
 
 data class Event (
     val id: String,
-    val host: Host,
-    val address: Address,
+    val hostId: String,
+    val locationId: String,
     val name: String,
     val description: String,
     val createdAt: Date,
