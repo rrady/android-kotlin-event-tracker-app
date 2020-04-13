@@ -9,6 +9,7 @@ import dagger.android.HasAndroidInjector
 import io.realm.Realm
 
 import com.eventtracker.app.di.components.DaggerAppComponent
+import com.squareup.picasso.Picasso
 
 class App : Application(), HasAndroidInjector {
     @Inject
@@ -23,6 +24,7 @@ class App : Application(), HasAndroidInjector {
             .inject(this)
 
         MultiDex.install(this)
+        Picasso.Builder(this).build()
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector

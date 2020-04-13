@@ -13,6 +13,8 @@ buildscript {
         versionName = "1.0"
 
         dagger_version = "2.27"
+        lifecycle_version = "2.2.0"
+        groupie_version = "2.7.0"
     }
 
     repositories {
