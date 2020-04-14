@@ -24,7 +24,6 @@ class App : Application(), HasAndroidInjector {
             .inject(this)
 
         MultiDex.install(this)
-        Picasso.Builder(this).build()
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector

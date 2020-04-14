@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eventtracker.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -13,10 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <!--        <activity-->
-<!--            android:name=".ui.host.HostListActivity"-->
-<!--            android:label="@string/title_activity_host_list"-->
+<!--            android:name=".ui.hostdetail.HostActivity"-->
+<!--            android:label="@string/title_activity_host"-->
 <!--            android:theme="@style/AppTheme.NoActionBar"></activity>-->
-        <activity android:name=".ui.hosts.HostListActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <!-- <activity -->
+        <!-- android:name=".ui.host.HostListActivity" -->
+        <!-- android:label="@string/title_activity_host_list" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"></activity> -->
+        <activity
+            android:name=".ui.eventdetail.EventDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

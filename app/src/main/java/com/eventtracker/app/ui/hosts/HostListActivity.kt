@@ -2,6 +2,7 @@ package com.eventtracker.app.ui.hosts
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.xwray.groupie.GroupAdapter
@@ -22,6 +23,19 @@ class HostListActivity: AppCompatActivity() {
         binding.recyclerViewHost.adapter = adapter
         viewModel = ViewModelProvider(this).get(HostListViewModel::class.java)
         binding.viewModel = viewModel
+
+        binding.searchViewHost.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                var hosts = binding!!.viewModel!!.searchHosts(newText)
+                adapter.update(hosts.map { HostItem(it) })
+                return false
+            }
+
+        })
 
         populateHosts()
     }
