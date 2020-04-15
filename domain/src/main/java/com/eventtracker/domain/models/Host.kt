@@ -8,7 +8,6 @@ data class Host (
     val site: String,
     val phone: String,
     val email: String,
-    val address: String,
     val avatarUri: String
 
 )

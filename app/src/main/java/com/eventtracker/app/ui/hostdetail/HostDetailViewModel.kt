@@ -11,7 +11,6 @@ class HostDetailViewModel(): ViewModel() {
     private val _site = MutableLiveData<String>()
     private val _phone = MutableLiveData<String>()
     private val _email = MutableLiveData<String>()
-    private val _address = MutableLiveData<String>()
     private val _avatarUri = MutableLiveData<String>()
 
     val name: LiveData<String>
@@ -32,9 +31,6 @@ class HostDetailViewModel(): ViewModel() {
     val email: LiveData<String>
         get() = _email
 
-    val address: LiveData<String>
-        get() = _address
-
     val avatarUri: LiveData<String>
         get() = _avatarUri
 
@@ -45,7 +41,6 @@ class HostDetailViewModel(): ViewModel() {
         _site.value = "www.control.ro"
         _phone.value = "0722222222"
         _email.value = "control@control.ro"
-        _address.value = "Voluntexas County"
         _avatarUri.value = "https://www.gstatic.com/webp/gallery/4.sm.jpg"
     }
 }

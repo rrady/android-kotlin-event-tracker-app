@@ -16,12 +16,11 @@ data class FirebaseHost(
     val site: String,
     val phone: String,
     val email: String,
-    val address: String,
     val avatarUri: String
 ) {
     @Exclude
     fun toHost(): Host {
-        return Host(id, name, description, info, site, phone, email, address ,avatarUri)
+        return Host(id, name, description, info, site, phone, email, avatarUri)
     }
 
     @Exclude
@@ -33,14 +32,13 @@ data class FirebaseHost(
             "site" to site,
             "phone" to phone,
             "email" to email,
-            "address" to address,
             "avatarUri" to avatarUri
         )
     }
 
     companion object {
         fun fromHost(host: Host): FirebaseHost {
-            return FirebaseHost(host.id, host.name, host.description, host.info, host.site, host.phone, host.email, host.address, host.avatarUri)
+            return FirebaseHost(host.id, host.name, host.description, host.info, host.site, host.phone, host.email, host.avatarUri)
         }
     }
 }
