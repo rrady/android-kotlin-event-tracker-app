@@ -9,15 +9,20 @@ open class RealmHost (
     var id: String = "",
     var name: String = "",
     var description: String = "",
+    var info: String = "",
+    var site: String = "",
+    var phone: String = "",
+    var email: String = "",
     var avatarUri: String = ""
+
 ): RealmObject() {
     fun toHost(): Host {
-        return Host(id, name, description, avatarUri)
+        return Host(id, name, description, info, site, phone, email, avatarUri)
     }
 
     companion object {
         fun fromHost(host: Host): RealmHost {
-            return RealmHost(host.id, host.name, host.description, host.avatarUri)
+            return RealmHost(host.id, host.name, host.description, host.info, host.site, host.phone, host.email, host.avatarUri)
         }
     }
 }

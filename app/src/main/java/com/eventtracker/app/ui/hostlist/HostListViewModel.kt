@@ -6,9 +6,9 @@ import java.util.*
 
 class HostListViewModel: ViewModel() {
     private val hosts = listOf<Host>(
-        Host(UUID.randomUUID().toString(), "Club A", "Club a description", "https://www.gstatic.com/webp/gallery/4.sm.jpg"),
-        Host(UUID.randomUUID().toString(), "Club B", "Club b description", "https://www.gstatic.com/webp/gallery/4.sm.jpg"),
-        Host(UUID.randomUUID().toString(), "Club C", "Club c description", "https://www.gstatic.com/webp/gallery/4.sm.jpg")
+        Host(UUID.randomUUID().toString(), "Club A", "Club a description", "Pub1Info", "www.pub.ro", "0722222221", "info1@pub.ro", "https://www.gstatic.com/webp/gallery/4.sm.jpg"),
+        Host(UUID.randomUUID().toString(), "Club B", "Club b description", "Pub2Info", "www.pub.ro", "0722222222", "info2@pub.ro", "https://www.gstatic.com/webp/gallery/4.sm.jpg"),
+        Host(UUID.randomUUID().toString(), "Club C", "Club c description", "Pub3Info", "www.pub.ro", "0722222223", "info3@pub.ro", "https://www.gstatic.com/webp/gallery/4.sm.jpg")
     )
 
     fun getHosts(): List<Host> {
