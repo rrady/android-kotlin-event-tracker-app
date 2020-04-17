@@ -28,16 +28,24 @@ class EventListFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list, container, false)
         binding.recyclerViewEvents.adapter = adapter
         viewModel = ViewModelProvider(this).get(EventListViewModel::class.java)
-        viewModel.hostId = arguments?.getString(HostActivity.HOST_ID_KEY)!!
+        viewModel.hostId = arguments?.getString(HOST_ID_KEY)!!
         binding.viewModel = viewModel
 
         return binding.root
     }
 
     companion object {
+        const val HOST_ID_KEY = "HOST_ID_KEY"
+
         @JvmStatic
-        fun newInstance(): EventListFragment {
-            return EventListFragment()
+        fun newInstance(hostId: String): EventListFragment {
+            val instance =  EventListFragment()
+
+            val args = Bundle()
+            args.putString(HOST_ID_KEY, hostId)
+            instance.arguments = args
+
+            return instance
         }
     }
 }

@@ -1,15 +1,17 @@
 package com.eventtracker.app.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.eventtracker.app.R
+import dagger.android.support.DaggerAppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity: AppCompatActivity() {
+import com.eventtracker.app.R
+
+class MainActivity: DaggerAppCompatActivity() {
+
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.main_activity)

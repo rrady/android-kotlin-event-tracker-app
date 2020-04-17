@@ -28,7 +28,7 @@ class HostDetailFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_host_detail, container, false)
-        var hostWrapper = arguments?.getParcelable<HostWrapper>(HostListFragment.HOST_KEY)
+        var hostWrapper = arguments?.getParcelable<HostWrapper>(HOST_KEY)
 
         viewModel = ViewModelProvider(this).get(HostDetailViewModel::class.java)
         viewModel.host = hostWrapper?.host!!
@@ -38,9 +38,17 @@ class HostDetailFragment : Fragment() {
     }
 
     companion object {
+        const val HOST_KEY = "HOST_KEY"
+
         @JvmStatic
-        fun newInstance(): HostDetailFragment {
-            return HostDetailFragment()
+        fun newInstance(hostWrapper: HostWrapper): HostDetailFragment {
+            val instance = HostDetailFragment()
+
+            val args = Bundle()
+            args.putParcelable(HOST_KEY, hostWrapper)
+            instance.arguments = args
+
+            return instance
         }
     }
 }

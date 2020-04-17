@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="asd"
+            android:text="@{viewModel.host.info}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="asd"
+            android:text="@{viewModel.host.site}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,22 +43,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="asd"
+            android:text="@{viewModel.host.phone}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2_site" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_site" />
 
         <TextView
             android:id="@+id/textView_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="asd"
+            android:text="@{viewModel.host.email}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_phone" />
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView_address"
@@ -79,6 +79,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:src="@{viewModel.host.avatarUri}"
             app:layout_constraintBottom_toTopOf="@+id/mapView_address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +91,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Control Club"
+            android:text="@{viewModel.host.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
             app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +104,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Control Club description"
+            android:text="@{viewModel.host.description}"
             app:layout_constraintBottom_toTopOf="@+id/mapView_address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_avatar"

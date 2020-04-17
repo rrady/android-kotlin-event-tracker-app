@@ -1,5 +1,6 @@
 package com.eventtracker.app.ui.hostlist
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,11 +17,23 @@ import com.eventtracker.app.R
 import com.eventtracker.app.databinding.FragmentHostListBinding
 import com.eventtracker.app.ui.host.HostActivity
 import com.eventtracker.app.wrappers.HostWrapper
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 class HostListFragment: Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var binding: FragmentHostListBinding
-    private lateinit var viewModel: HostListViewModel
+    private val viewModel: HostListViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[HostListViewModel::class.java]
+    }
     private var adapter = GroupAdapter<GroupieViewHolder>()
+
+    override fun onAttach(activity: Activity) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(activity)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +55,7 @@ class HostListFragment: Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_host_list, container, false)
         binding.recyclerViewHost.adapter = adapter
-        viewModel = ViewModelProvider(this).get(HostListViewModel::class.java)
+        viewModel.initHosts()
         binding.viewModel = viewModel
 
         binding.searchViewHost.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
@@ -63,12 +76,10 @@ class HostListFragment: Fragment() {
     }
 
     private fun populateHosts() {
-        viewModel.getHosts().forEach {
-            adapter.add(HostItem(it))
-        }
+        adapter.addAll(viewModel.hosts.map { HostItem(it) })
     }
 
     companion object {
-        val HOST_KEY = "HOST_KEY"
+        const val HOST_KEY = "HOST_KEY"
     }
 }

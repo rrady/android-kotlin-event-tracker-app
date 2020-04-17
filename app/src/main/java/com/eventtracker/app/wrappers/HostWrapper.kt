@@ -15,6 +15,10 @@ class HostWrapper(private val _host: Host): Parcelable {
         parcel.writeString(_host.id)
         parcel.writeString(_host.name)
         parcel.writeString(_host.description)
+        parcel.writeString(_host.info)
+        parcel.writeString(_host.site)
+        parcel.writeString(_host.phone)
+        parcel.writeString(_host.email)
         parcel.writeString(_host.avatarUri)
     }
 

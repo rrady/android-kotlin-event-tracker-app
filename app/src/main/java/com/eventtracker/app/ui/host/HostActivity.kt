@@ -19,28 +19,13 @@ class HostActivity : AppCompatActivity() {
 
         val hostWrapper = intent.getParcelableExtra<HostWrapper>(HostListFragment.HOST_KEY)
 
-        val hostDetailFragment = HostDetailFragment.newInstance()
-        val hostDetailFragmentArguments = Bundle()
-        hostDetailFragmentArguments.putParcelable(HOST_KEY, hostWrapper)
-        hostDetailFragment.arguments = hostDetailFragmentArguments
-
-        val eventListFragment = EventListFragment.newInstance()
-        val eventFragmentArguments = Bundle()
-        eventFragmentArguments.putString(HOST_ID_KEY, hostWrapper.host.id)
-        eventListFragment.arguments = eventFragmentArguments
-
         tabsAdapter = TabsAdapter(supportFragmentManager)
-        tabsAdapter.add(hostWrapper.host.name, hostDetailFragment)
-        tabsAdapter.add("Events", eventListFragment)
+        tabsAdapter.add(hostWrapper.host.name, HostDetailFragment.newInstance(hostWrapper))
+        tabsAdapter.add("Events", EventListFragment.newInstance(hostWrapper.host.id))
 
         viewPager = findViewById(R.id.view_pager)
         viewPager.adapter = tabsAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
-    }
-
-    companion object {
-        val HOST_KEY = "HOST_KEY"
-        val HOST_ID_KEY = "HOST_ID_KEY"
     }
 }

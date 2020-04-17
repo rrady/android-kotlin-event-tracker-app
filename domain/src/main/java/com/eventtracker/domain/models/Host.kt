@@ -9,5 +9,4 @@ data class Host (
     val phone: String,
     val email: String,
     val avatarUri: String
-
 )
