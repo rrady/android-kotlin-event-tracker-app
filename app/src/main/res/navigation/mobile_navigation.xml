@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_hosts_feed">
+
+    <fragment
+        android:id="@+id/navigation_hosts_feed"
+        android:name="com.eventtracker.app.ui.hostlist.HostListFragment"
+        android:label="HOSTS"
+        tools:layout="@layout/fragment_host_list" />
+
+    <fragment
+        android:id="@+id/navigation_my_events"
+        android:name="com.eventtracker.app.ui.host.EventListFragment"
+        android:label="MY EVENTS"
+        tools:layout="@layout/fragment_event_list" />
+
+</navigation>

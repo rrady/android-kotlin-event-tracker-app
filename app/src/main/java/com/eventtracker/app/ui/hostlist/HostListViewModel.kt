@@ -1,4 +1,4 @@
-package com.eventtracker.app.ui.hosts
+package com.eventtracker.app.ui.hostlist
 
 import androidx.lifecycle.ViewModel
 import com.eventtracker.domain.models.Host

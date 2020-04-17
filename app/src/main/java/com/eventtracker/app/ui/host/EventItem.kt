@@ -1,4 +1,4 @@
-package com.eventtracker.app.ui.hostdetail
+package com.eventtracker.app.ui.host
 
 import com.xwray.groupie.databinding.BindableItem
 
@@ -12,7 +12,6 @@ class EventItem(private val event: Event): BindableItem<EventListItemBinding>() 
     }
 
     override fun bind(viewBinding: EventListItemBinding, position: Int) {
-        val viewModel = EventViewModel(event)
-        viewBinding.viewModel = viewModel
+
     }
 }

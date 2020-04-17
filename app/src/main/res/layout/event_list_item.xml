@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.eventtracker.app.ui.hostdetail.EventViewModel" />
+            type="com.eventtracker.app.ui.host.EventListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@{viewModel.getPhotoUri()}"
             app:layout_constraintDimensionRatio="h,16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.getName()}"
+            android:text="Event A"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView_image" />
 
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{viewModel.getBeginDate()}"
+            android:text="starts now"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView_at"
             app:layout_constraintTop_toBottomOf="@+id/imageView_image" />

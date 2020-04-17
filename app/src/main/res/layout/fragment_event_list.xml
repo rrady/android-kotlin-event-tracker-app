@@ -2,17 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="viewModel"
-            type="com.eventtracker.app.ui.hostdetail.EventListViewModel" />
+            type="com.eventtracker.app.ui.host.EventListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.hostdetail.EventsFragment">
+        tools:context=".ui.host.EventListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_events"

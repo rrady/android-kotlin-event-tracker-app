@@ -1,4 +1,4 @@
-package com.eventtracker.app.ui.hostdetail
+package com.eventtracker.app.ui.host
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.eventtracker.app.databinding.FragmentEventListBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
-class EventsFragment: Fragment() {
+class EventListFragment: Fragment() {
     private lateinit var binding: FragmentEventListBinding
     private lateinit var viewModel: EventListViewModel
     private var adapter = GroupAdapter<GroupieViewHolder>()
@@ -28,17 +28,16 @@ class EventsFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list, container, false)
         binding.recyclerViewEvents.adapter = adapter
         viewModel = ViewModelProvider(this).get(EventListViewModel::class.java)
+        viewModel.hostId = arguments?.getString(HostActivity.HOST_ID_KEY)!!
         binding.viewModel = viewModel
-
-        adapter.addAll(viewModel.getEvents().map { EventItem(it) })
 
         return binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(): EventsFragment {
-            return EventsFragment()
+        fun newInstance(): EventListFragment {
+            return EventListFragment()
         }
     }
 }

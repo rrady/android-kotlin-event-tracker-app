@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.eventtracker.app.ui.hosts.HostViewModel" />
+            type="com.eventtracker.app.ui.hostlist.HostViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -2,17 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
-            type="com.eventtracker.app.ui.hostdetail.HostDetailViewModel" />
+            type="com.eventtracker.app.ui.host.HostDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.hostdetail.HostFragment">
+        tools:context=".ui.host.HostFragment">
 
         <TextView
             android:id="@+id/textView_info"
@@ -78,7 +80,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@{viewModel.getAvatarUri()}"
             app:layout_constraintBottom_toTopOf="@+id/mapView_address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +91,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{viewModel.getName()}"
+            android:text="Control Club"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_avatar"
             app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +104,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{viewModel.getDescription()}"
+            android:text="Control Club description"
             app:layout_constraintBottom_toTopOf="@+id/mapView_address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_avatar"

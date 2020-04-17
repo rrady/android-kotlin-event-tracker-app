@@ -1,4 +1,4 @@
-package com.eventtracker.app.ui.eventdetail
+package com.eventtracker.app.ui.event
 
 import androidx.lifecycle.ViewModel
 
