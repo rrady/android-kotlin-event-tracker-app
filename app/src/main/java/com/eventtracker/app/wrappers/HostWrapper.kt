@@ -7,8 +7,8 @@ import com.eventtracker.domain.models.Host
 
 class HostWrapper(private val _host: Host): Parcelable {
     constructor(parcel: Parcel) : this(
-        Host(parcel.readString()!!, parcel.readString()!!,
-            parcel.readString()!!, parcel.readString()!!)
+        Host(parcel.readString()!!, parcel.readString()!!, parcel.readString()!!, parcel.readString()!!,
+            parcel.readString()!!, parcel.readString()!!, parcel.readString()!!, parcel.readString()!!)
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
