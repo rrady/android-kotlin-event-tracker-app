@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.eventtracker.app.ui.host.HostDetailViewModel" />
@@ -20,7 +21,9 @@
             style="@style/Widget.MaterialComponents.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.host.info}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +34,9 @@
             android:id="@+id/textView_site"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.host.site}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +47,9 @@
             android:id="@+id/textView_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.host.phone}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +60,9 @@
             android:id="@+id/textView_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.host.email}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +81,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView_avatar" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView_avatar"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -114,7 +123,9 @@
             android:id="@+id/textView_followers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="75,935 people follow this"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">EventTracker App</string>
+    <string name="on_label">on</string>
+    <string name="bottom_nav_hosts">HOSTS</string>
+    <string name="bottom_nav_my_events">MY EVENTS</string>
+    <string name="nav_new_host">NEW HOST</string>
+    <string name="nav_new_event">NEW EVENT</string>
+    <string name="select_photo">SELECT PHOTO</string>
+    <string name="submit_host_button">SUBMIT HOST</string>
+    <string name="submit_event_button">SUBMIT EVENT</string>
 </resources>

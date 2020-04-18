@@ -1,16 +1,16 @@
-package com.eventtracker.app.di.modules
+package com.eventtracker.app.di.modules.ui
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 import com.eventtracker.app.ui.MainActivity
-import com.eventtracker.app.ui.hostlist.HostListFragment
+import com.eventtracker.app.ui.host.HostActivity
 
 @Module
-abstract class MainActivityModule {
+abstract class ActivitiesModule {
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
 
     @ContributesAndroidInjector
-    abstract fun contributeHostListFragment(): HostListFragment
+    abstract fun contributeHostActivity(): HostActivity
 }

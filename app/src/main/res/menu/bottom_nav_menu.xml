@@ -3,15 +3,10 @@
     <item
         android:id="@+id/navigation_hosts_feed"
         android:icon="@drawable/ic_launcher_background"
-        android:title="HOSTS" />
+        android:title="@string/bottom_nav_hosts" />
 
     <item
         android:id="@+id/navigation_my_events"
         android:icon="@drawable/ic_launcher_background"
-        android:title="MY EVENTS" />
-
-<!--    <item-->
-<!--        android:id="@+id/"-->
-<!--        android:icon="@drawable/ic_launcher_background"-->
-<!--        android:title="ASD" />-->
+        android:title="@string/bottom_nav_my_events" />
 </menu>

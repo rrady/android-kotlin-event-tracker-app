@@ -8,13 +8,12 @@ import dagger.android.AndroidInjector
 import dagger.android.AndroidInjectionModule
 
 import com.eventtracker.app.App
-import com.eventtracker.app.di.modules.MainActivityModule
-import com.eventtracker.app.di.modules.RepositoriesModule
-import com.eventtracker.app.di.modules.UseCasesModule
-import com.eventtracker.app.di.modules.ViewModelsModule
+import com.eventtracker.app.di.modules.UiModule
+import com.eventtracker.app.di.modules.DataModule
+import com.eventtracker.app.di.modules.DomainModule
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, MainActivityModule::class, ViewModelsModule::class, UseCasesModule::class, RepositoriesModule::class])
+@Component(modules = [AndroidInjectionModule::class, UiModule::class, DataModule::class, DomainModule::class])
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     interface Builder {
