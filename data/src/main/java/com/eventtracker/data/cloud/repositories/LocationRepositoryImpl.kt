@@ -1,72 +1,67 @@
 package com.eventtracker.data.cloud.repositories
 
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 
 import com.eventtracker.domain.ResultWrapper
 import com.eventtracker.domain.models.Location
 import com.eventtracker.domain.repositories.LocationRepository
+import com.eventtracker.domain.exceptions.LocationRepositoryException
 
-import com.eventtracker.data.cloud.entities.FirebaseLocation
-import com.eventtracker.data.cloud.utils.awaitTaskCompletable
-import com.eventtracker.data.cloud.utils.awaitTaskResult
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 
 const val LOCATION_COLLECTION = "locations"
 
 class LocationRepositoryImpl: LocationRepository {
-    private val db = Firebase.firestore
+    private val db = Firebase.database.reference
 
     override suspend fun getLocation(id: String): ResultWrapper<Location?, Exception> {
-        var document = db.collection(LOCATION_COLLECTION).document(id)
+        var document = db.child(LOCATION_COLLECTION).child(id)
+        var result: Location? = null
 
-        return try {
-            val task = awaitTaskResult(document.get())
+            document.addValueEventListener(object: ValueEventListener {
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
 
-            ResultWrapper.build {
-                task.toObject<FirebaseLocation>()?.toLocation()
-            }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                      result = dataSnapshot.getValue(Location::class.java)
+                }
+            })
+        return ResultWrapper.build { result?: throw LocationRepositoryException }
         }
-    }
 
     override suspend fun addLocation(location: Location): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(LOCATION_COLLECTION)
-                .document(location.id)
-                .set(FirebaseLocation.fromLocation(location))
-            )
+        var key: String? = db.child(LOCATION_COLLECTION).push().key
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/location/$key"] = location
+        val result = db.updateChildren(childUpdates)
 
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw LocationRepositoryException }
         }
     }
 
     override suspend fun updateLocation(location: Location): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(LOCATION_COLLECTION)
-                .document(location.id)
-                .update(FirebaseLocation.fromLocation(location).toMap())
-            )
+        var result = db.child(LOCATION_COLLECTION).child(location.id).setValue(location)
 
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw LocationRepositoryException }
         }
     }
 
     override suspend fun deleteLocation(id: String): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(LOCATION_COLLECTION)
-                .document(id)
-                .delete()
-            )
+        var result = db.child(LOCATION_COLLECTION).child(id).removeValue()
 
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw LocationRepositoryException }
         }
     }
 }

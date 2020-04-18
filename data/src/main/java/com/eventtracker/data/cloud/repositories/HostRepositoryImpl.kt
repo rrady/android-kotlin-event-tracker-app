@@ -1,97 +1,94 @@
 package com.eventtracker.data.cloud.repositories
 
+import android.net.Uri
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.QuerySnapshot
 
 import com.eventtracker.domain.ResultWrapper
 import com.eventtracker.domain.models.Host
 import com.eventtracker.domain.repositories.HostRepository
+import com.eventtracker.domain.exceptions.HostRepositoryException
 
-import com.eventtracker.data.cloud.entities.FirebaseHost
-import com.eventtracker.data.cloud.utils.awaitTaskCompletable
-import com.eventtracker.data.cloud.utils.awaitTaskResult
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.storage.ktx.storage
 
 const val HOST_COLLECTION = "hosts"
 
 class HostRepositoryImpl: HostRepository {
-    private val db = Firebase.firestore
+    private val db = Firebase.database.reference
+    private val storage = Firebase.storage.reference
 
-    override suspend fun getHosts(): ResultWrapper<List<Host>, Exception> {
-        var collection = db.collection(HOST_COLLECTION)
+    override fun getHosts(): ResultWrapper<List<Host>, Exception> {
+        var document = db.child(HOST_COLLECTION)
+        var results: MutableList<Host> = mutableListOf()
 
-        return try {
-            val task = awaitTaskResult(collection.get())
-
-            return resultToHostList(task)
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
-        }
-    }
-
-    override suspend fun getHost(id: String): ResultWrapper<Host?, Exception> {
-        var document = db.collection(HOST_COLLECTION).document(id)
-
-        return try {
-            val task = awaitTaskResult(document.get())
-
-            ResultWrapper.build {
-                task.toObject<FirebaseHost>()?.toHost()
+        document.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
             }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (hostSnapshot in dataSnapshot.children) {
+                    val host: Host? = hostSnapshot.getValue(Host::class.java)
+                    if (host != null) {
+                        results.add(host)
+                    }
+                }
+            }
+        })
+        return ResultWrapper.build { results?: throw HostRepositoryException }
+    }
+
+
+    override fun getHost(id: String): ResultWrapper<Host?, Exception> {
+        var document = db.child(HOST_COLLECTION).child(id)
+        var result: Host? = null
+
+        document.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                result = dataSnapshot.getValue(Host::class.java)
+            }
+        })
+        return ResultWrapper.build { result?: throw HostRepositoryException }
+    }
+
+    override fun addHost(host: Host): ResultWrapper<Unit, Exception> {
+        var key: String? = db.child(HOST_COLLECTION).push().key
+
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/hosts/$key"] = host
+        val result = db.updateChildren(childUpdates)
+
+        storage.putFile(Uri.parse(host.avatarUri))
+
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw HostRepositoryException }
         }
     }
 
-    override suspend fun addHost(host: Host): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(HOST_COLLECTION)
-                .document(host.id)
-                .set(FirebaseHost.fromHost(host))
-            )
+    override fun updateHost(host: Host): ResultWrapper<Unit, Exception> {
+        var result = db.child(HOST_COLLECTION).child(host.id).setValue(host)
 
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw HostRepositoryException }
         }
     }
 
-    override suspend fun updateHost(host: Host): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(HOST_COLLECTION)
-                .document(host.id)
-                .update(FirebaseHost.fromHost(host).toMap())
-            )
+    override fun deleteHost(id: String): ResultWrapper<Unit, Exception> {
+        var result = db.child(HOST_COLLECTION).child(id).removeValue()
 
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
-        }
-    }
-
-    override suspend fun deleteHost(id: String): ResultWrapper<Unit, Exception> {
-        return try {
-            awaitTaskCompletable(db.collection(HOST_COLLECTION)
-                .document(id)
-                .delete()
-            )
-
-            ResultWrapper.build { Unit }
-        } catch (exception: Exception) {
-            ResultWrapper.build { throw exception }
-        }
-    }
-
-    private fun resultToHostList(result: QuerySnapshot?): ResultWrapper<List<Host>, Exception> {
-        val hosts = mutableListOf<Host>()
-
-        result?.forEach { document ->
-            hosts.add(document.toObject<FirebaseHost>().toHost())
-        }
-
-        return ResultWrapper.build {
-            hosts
+        return if ( result.isSuccessful ) {
+            ResultWrapper.build {Unit}
+        } else {
+            ResultWrapper.build { throw HostRepositoryException }
         }
     }
 }
