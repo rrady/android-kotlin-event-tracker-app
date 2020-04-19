@@ -15,8 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "1044705506415-ugc5dt4aegtcr83prt4285se08u2voao.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "1044705506415-qil3sso0fvno7rcdu1o3sri4f5msed9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eventtracker.app",
+            "certificate_hash": "6854fad41f54c877a80d24ffeafd085be4e3cbb8"
+          }
         }
       ],
       "api_key": [
@@ -28,7 +32,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1044705506415-ugc5dt4aegtcr83prt4285se08u2voao.apps.googleusercontent.com",
+              "client_id": "1044705506415-i2fn72r5dt4hn1icrva5h4heu936fmrd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
