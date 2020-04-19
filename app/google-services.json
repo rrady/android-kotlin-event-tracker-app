@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1044705506415",
+    "firebase_url": "https://android-unibuc.firebaseio.com",
+    "project_id": "android-unibuc",
+    "storage_bucket": "android-unibuc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044705506415:android:a6e1c78c53b779cd19899a",
+        "android_client_info": {
+          "package_name": "com.eventtracker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044705506415-ugc5dt4aegtcr83prt4285se08u2voao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1Uz-Crse9u-NjqIbXTYFUlpK16yO5JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044705506415-ugc5dt4aegtcr83prt4285se08u2voao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

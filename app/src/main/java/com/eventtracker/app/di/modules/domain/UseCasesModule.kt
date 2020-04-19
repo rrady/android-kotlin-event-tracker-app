@@ -17,6 +17,12 @@ class UseCasesModule {
 
     @Provides
     @Singleton
+    fun provideCreateHostUseCase(hostRepository: HostRepository): CreateHostUseCase {
+        return CreateHostUseCase(hostRepository)
+    }
+
+    @Provides
+    @Singleton
     fun provideGetEventsUseCase(hostRepository: HostRepository): GetEventsUseCase {
         return GetEventsUseCase(hostRepository)
     }

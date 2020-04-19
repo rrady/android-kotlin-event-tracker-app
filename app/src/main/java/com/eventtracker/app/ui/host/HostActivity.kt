@@ -25,7 +25,7 @@ class HostActivity : AppCompatActivity() {
 
         viewPager = findViewById(R.id.view_pager)
         viewPager.adapter = tabsAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs: TabLayout = findViewById(R.id.tab_layout)
         tabs.setupWithViewPager(viewPager)
     }
 }

@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -42,7 +42,6 @@ dependencies {
 
     implementation "javax.annotation:jsr250-api:1.0"
     implementation "javax.inject:javax.inject:1"
-
-    implementation 'com.google.firebase:firebase-database-ktx:19.2.1'
-    implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
+    implementation 'com.google.firebase:firebase-firestore:21.4.2'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.4.2'
 }
