@@ -1,9 +1,11 @@
 package com.eventtracker.data.cloud.repositories
 
+import android.net.Uri
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.storage.ktx.storage
 
 import com.eventtracker.domain.ResultWrapper
 import com.eventtracker.domain.models.Host
@@ -12,11 +14,15 @@ import com.eventtracker.domain.repositories.HostRepository
 import com.eventtracker.data.cloud.entities.FirebaseHost
 import com.eventtracker.data.cloud.utils.awaitTaskCompletable
 import com.eventtracker.data.cloud.utils.awaitTaskResult
+import com.eventtracker.domain.exceptions.HostRepositoryException
+import java.io.File
+import java.util.*
 
 const val HOST_COLLECTION = "hosts"
 
 class HostRepositoryImpl: HostRepository {
     private val db = Firebase.firestore
+    private val storage = Firebase.storage
 
     override suspend fun getHosts(): ResultWrapper<List<Host>, Exception> {
         var collection = db.collection(HOST_COLLECTION)
@@ -45,6 +51,9 @@ class HostRepositoryImpl: HostRepository {
     }
 
     override suspend fun addHost(host: Host): ResultWrapper<Unit, Exception> {
+        val storageUri = uploadImageToFirebaseStorage(host.avatarUri)
+        host.avatarUri = storageUri
+
         return try {
             awaitTaskCompletable(
                 db.collection(HOST_COLLECTION)
@@ -93,5 +102,17 @@ class HostRepositoryImpl: HostRepository {
         }
 
         return ResultWrapper.build { hosts }
+    }
+
+    private suspend fun uploadImageToFirebaseStorage(avatarUri: String): String {
+        val filename = UUID.randomUUID().toString()
+        val reference = storage.getReference("$HOST_COLLECTION/$filename")
+        val result = awaitTaskResult(reference.putFile(Uri.fromFile(File(avatarUri))))
+
+        if (result.metadata == null) {
+            throw Exception(result.error?.message?: "Failed to upload avatar") as HostRepositoryException
+        }
+
+        return result.metadata!!.reference.toString()
     }
 }

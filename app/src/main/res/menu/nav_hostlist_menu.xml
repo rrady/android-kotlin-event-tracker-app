@@ -5,7 +5,4 @@
     <item android:id="@+id/menu_new_host"
         android:title="@string/nav_new_host"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/menu_sign_in"
-        android:title="@string/nav_sign_in"
-        app:showAsAction="ifRoom" />
 </menu>

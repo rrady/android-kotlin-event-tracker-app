@@ -1,5 +1,6 @@
 package com.eventtracker.app.ui.newhost
 
+import android.graphics.Bitmap
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,11 +26,14 @@ class NewHostViewModel @Inject constructor(private val useCase: CreateHostUseCas
     val site = MutableLiveData<String>()
     val phone = MutableLiveData<String>()
     val email = MutableLiveData<String>()
+    var avatarUri: String? = null
+
+    private var avatar: Bitmap? = null
 
     fun onSubmit() = launch {
         validateInput()
 
-        val host = Host(UUID.randomUUID().toString(), name.value!!, description.value!!, info.value!!, site.value!!, phone.value!!, email.value!!, "https://www.gstatic.com/webp/gallery/4.sm.jpg")
+        val host = Host(UUID.randomUUID().toString(), name.value!!, description.value!!, info.value!!, site.value!!, phone.value!!, email.value!!, avatarUri!!)
 
         useCase.execute(host)
     }

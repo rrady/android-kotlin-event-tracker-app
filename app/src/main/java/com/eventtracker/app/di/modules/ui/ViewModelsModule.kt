@@ -13,6 +13,7 @@ import com.eventtracker.app.ui.host.EventListViewModel
 import com.eventtracker.app.ui.hostlist.HostListViewModel
 import com.eventtracker.app.ui.hostlist.HostViewModel
 import com.eventtracker.app.ui.newhost.NewHostViewModel
+import com.eventtracker.app.ui.profile.ProfileViewModel
 
 @Module
 abstract class ViewModelsModule {
@@ -28,6 +29,11 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(NewHostViewModel::class)
     abstract fun bindNewHostViewModel(viewModel: NewHostViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 
 //    @Binds
 //    @IntoMap

@@ -10,7 +10,6 @@ object ImageBindingAdapter {
     fun loadImage(view: ImageView, imageUrl: String) {
         Picasso.get()
             .load(imageUrl)
-            .fit()
             .into(view)
     }
 }

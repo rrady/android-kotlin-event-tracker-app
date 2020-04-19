@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_host_list" />
 
     <fragment
-        android:id="@+id/navigation_my_events"
-        android:name="com.eventtracker.app.ui.host.EventListFragment"
-        android:label="MY EVENTS"
+        android:id="@+id/navigation_my_profile"
+        android:name="com.eventtracker.app.ui.profile.ProfileFragment"
+        android:label="MY PROFILE"
         tools:layout="@layout/fragment_event_list" />
 
 </navigation>
