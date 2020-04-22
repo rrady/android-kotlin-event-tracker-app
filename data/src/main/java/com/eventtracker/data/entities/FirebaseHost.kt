@@ -1,4 +1,4 @@
-package com.eventtracker.data.cloud.entities
+package com.eventtracker.data.entities
 
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
@@ -9,7 +9,8 @@ import com.eventtracker.domain.models.Host
 @IgnoreExtraProperties
 data class FirebaseHost(
     @DocumentId
-    var id: String,
+    val id: String,
+    val ownerId: String,
     val name: String,
     val description: String,
     val info: String,
@@ -18,17 +19,18 @@ data class FirebaseHost(
     val email: String,
     val avatarUri: String
 ) {
-    constructor(): this("", "", "", "", "", "", "", "")
+    constructor(): this("", "", "", "", "", "", "", "", "")
 
     @Exclude
     fun toHost(): Host {
-        return Host(id, name, description, info, site, phone, email, avatarUri)
+        return Host(id, ownerId, name, description, info, site, phone, email, avatarUri)
     }
 
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
             "name" to name,
+            "ownerId" to ownerId,
             "description" to description,
             "info" to info,
             "site" to site,
@@ -40,7 +42,7 @@ data class FirebaseHost(
 
     companion object {
         fun fromHost(host: Host): FirebaseHost {
-            return FirebaseHost(host.id, host.name, host.description, host.info, host.site, host.phone, host.email, host.avatarUri)
+            return FirebaseHost(host.id, host.ownerId, host.name, host.description, host.info, host.site, host.phone, host.email, host.avatarUri)
         }
     }
 }

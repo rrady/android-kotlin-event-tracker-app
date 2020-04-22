@@ -1,9 +1,9 @@
-package com.eventtracker.data.cloud.utils
+package com.eventtracker.data.utils
 
-import com.google.android.gms.tasks.Task
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import com.google.android.gms.tasks.Task
 
 suspend fun <T> awaitTaskResult(task: Task<T>): T = suspendCoroutine { continuation ->
     task.addOnCompleteListener { task ->

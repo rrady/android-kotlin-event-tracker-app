@@ -1,6 +1,6 @@
 package com.eventtracker.app.ui.newhost
 
-import android.graphics.Bitmap
+import javax.inject.Inject
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,14 +9,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import javax.inject.Inject
+import com.google.firebase.auth.FirebaseAuth
 
 import com.eventtracker.domain.models.Host
 import com.eventtracker.domain.usecases.CreateHostUseCase
-import java.util.*
 
+class NewHostViewModel @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val useCase: CreateHostUseCase): ViewModel(), CoroutineScope {
 
-class NewHostViewModel @Inject constructor(private val useCase: CreateHostUseCase): ViewModel(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Main
 
@@ -28,12 +29,10 @@ class NewHostViewModel @Inject constructor(private val useCase: CreateHostUseCas
     val email = MutableLiveData<String>()
     var avatarUri: String? = null
 
-    private var avatar: Bitmap? = null
-
     fun onSubmit() = launch {
         validateInput()
 
-        val host = Host(UUID.randomUUID().toString(), name.value!!, description.value!!, info.value!!, site.value!!, phone.value!!, email.value!!, avatarUri!!)
+        val host = Host("", firebaseAuth.uid!!, name.value!!, description.value!!, info.value!!, site.value!!, phone.value!!, email.value!!, avatarUri!!)
 
         useCase.execute(host)
     }

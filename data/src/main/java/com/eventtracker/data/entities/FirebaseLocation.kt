@@ -1,4 +1,4 @@
-package com.eventtracker.data.cloud.entities
+package com.eventtracker.data.entities
 
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude

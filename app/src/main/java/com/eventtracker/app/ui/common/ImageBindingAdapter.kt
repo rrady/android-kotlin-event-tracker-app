@@ -8,6 +8,7 @@ object ImageBindingAdapter {
     @BindingAdapter("android:src")
     @JvmStatic
     fun loadImage(view: ImageView, imageUrl: String) {
+        if (imageUrl.isNullOrBlank()) return
         Picasso.get()
             .load(imageUrl)
             .into(view)

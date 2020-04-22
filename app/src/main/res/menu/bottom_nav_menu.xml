@@ -6,7 +6,7 @@
         android:title="@string/bottom_nav_hosts" />
 
     <item
-        android:id="@+id/navigation_my_events"
+        android:id="@+id/navigation_my_profile"
         android:icon="@drawable/ic_launcher_background"
-        android:title="@string/bottom_nav_my_events" />
+        android:title="@string/bottom_nav_my_profile" />
 </menu>

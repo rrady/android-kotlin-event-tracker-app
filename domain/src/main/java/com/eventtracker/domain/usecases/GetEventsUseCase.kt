@@ -1,11 +1,11 @@
 package com.eventtracker.domain.usecases
 
-import java.lang.Exception
 import com.eventtracker.domain.ResultWrapper
-import com.eventtracker.domain.repositories.HostRepository
+import com.eventtracker.domain.models.Event
+import com.eventtracker.domain.repositories.EventRepository
 
-class GetEventsUseCase(private val repository: HostRepository): BaseUseCaseWithParams<String, ResultWrapper<Unit, Exception>>() {
-    override suspend fun buildUseCase(params: String): ResultWrapper<Unit, Exception> {
-        TODO("Not yet implemented")
+class GetEventsUseCase(private val repository: EventRepository): BaseUseCaseWithParams<String, ResultWrapper<List<Event>, Exception>>() {
+    override suspend fun buildUseCase(params: String): ResultWrapper<List<Event>, Exception> {
+        return repository.getEventsForHost(params)
     }
 }

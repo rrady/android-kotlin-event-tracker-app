@@ -10,6 +10,7 @@ import com.eventtracker.app.di.utils.ViewModelFactory
 import com.eventtracker.app.di.utils.ViewModelKey
 import com.eventtracker.app.ui.event.EventDetailViewModel
 import com.eventtracker.app.ui.host.EventListViewModel
+import com.eventtracker.app.ui.host.HostDetailViewModel
 import com.eventtracker.app.ui.hostlist.HostListViewModel
 import com.eventtracker.app.ui.hostlist.HostViewModel
 import com.eventtracker.app.ui.newhost.NewHostViewModel
@@ -27,6 +28,11 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(HostDetailViewModel::class)
+    abstract fun bindHostDetailViewModel(viewModel: HostDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(NewHostViewModel::class)
     abstract fun bindNewHostViewModel(viewModel: NewHostViewModel): ViewModel
 
@@ -34,19 +40,4 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(HostViewModel::class)
-//    abstract fun bindHostViewModel(viewModel: HostViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(EventListViewModel::class)
-//    abstract fun bindEventListViewModel(viewModel: EventListViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(EventDetailViewModel::class)
-//    abstract fun bindEventDetailViewModel(viewModel: EventDetailViewModel): ViewModel
 }

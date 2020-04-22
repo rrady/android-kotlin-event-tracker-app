@@ -1,7 +1,7 @@
 package com.eventtracker.app.di.components
 
-import javax.inject.Singleton
 import android.app.Application
+import javax.inject.Singleton
 import dagger.Component
 import dagger.BindsInstance
 import dagger.android.AndroidInjector

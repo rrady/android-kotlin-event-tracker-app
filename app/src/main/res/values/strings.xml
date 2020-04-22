@@ -4,7 +4,10 @@
 
     <string name="on_label">on</string>
     <string name="bottom_nav_hosts">HOSTS</string>
-    <string name="bottom_nav_my_events">MY EVENTS</string>
+    <string name="bottom_nav_my_profile">MY PROFILE</string>
+    <string name="tab_events">EVENTS</string>
+    <string name="my_hosts">MY HOSTS</string>
+    <string name="my_events">MY EVENTS</string>
     <string name="nav_new_host">NEW HOST</string>
     <string name="nav_new_event">NEW EVENT</string>
     <string name="select_photo">SELECT PHOTO</string>
@@ -13,4 +16,15 @@
     <string name="take_photo">Take Photo</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="cancel">Cancel</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_begin_date">Begin date</string>
+    <string name="hint_end_date">End date</string>
+    <string name="hint_info">Info</string>
+    <string name="hint_site_address">Site address</string>
+    <string name="hint_phone_number">Phone number</string>
+    <string name="hint_email_address">E-mail address</string>
+    <string name="nav_sign_out">SIGN OUT</string>
+    <string name="tab_profile">PROFILE</string>
+    <string name="nav_delete_host">DELETE</string>
 </resources>

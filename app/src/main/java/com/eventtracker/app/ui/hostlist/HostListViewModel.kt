@@ -1,15 +1,15 @@
 package com.eventtracker.app.ui.hostlist
 
 import java.util.*
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlin.coroutines.CoroutineContext
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 import com.eventtracker.domain.models.Host
 import com.eventtracker.domain.usecases.GetHostsUseCase
@@ -31,7 +31,7 @@ class HostListViewModel @Inject constructor(private val useCase: GetHostsUseCase
 
     fun searchHosts(term: String?): List<Host> {
         return if (term == null || term.isEmpty()) {
-            _hosts.value!!
+            _hosts.value?: listOf()
         } else {
             val resultList = mutableListOf<Host>()
             for (host in _hosts.value!!) {

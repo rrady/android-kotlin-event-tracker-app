@@ -3,11 +3,11 @@ package com.eventtracker.app.ui.host
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 
 import com.eventtracker.app.R
 import com.eventtracker.app.ui.hostlist.HostListFragment
 import com.eventtracker.app.wrappers.HostWrapper
-import com.google.android.material.tabs.TabLayout
 
 class HostActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
@@ -21,10 +21,11 @@ class HostActivity : AppCompatActivity() {
 
         tabsAdapter = TabsAdapter(supportFragmentManager)
         tabsAdapter.add(hostWrapper.host.name, HostDetailFragment.newInstance(hostWrapper))
-        tabsAdapter.add("Events", EventListFragment.newInstance(hostWrapper.host.id))
+        tabsAdapter.add(getString(R.string.tab_events), EventListFragment.newInstance(hostWrapper.host.id))
 
         viewPager = findViewById(R.id.view_pager)
         viewPager.adapter = tabsAdapter
+
         val tabs: TabLayout = findViewById(R.id.tab_layout)
         tabs.setupWithViewPager(viewPager)
     }

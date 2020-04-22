@@ -1,8 +1,8 @@
 package com.eventtracker.app.di.modules.domain
 
+import javax.inject.Singleton
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 import com.eventtracker.domain.repositories.*
 import com.eventtracker.domain.usecases.*
@@ -23,26 +23,8 @@ class UseCasesModule {
 
     @Provides
     @Singleton
-    fun provideGetEventsUseCase(hostRepository: HostRepository): GetEventsUseCase {
-        return GetEventsUseCase(hostRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGetEventUseCase(hostRepository: HostRepository): GetEventUseCase {
-        return GetEventUseCase(hostRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNewHostUseCase(hostRepository: HostRepository): NewHostUseCase {
-        return NewHostUseCase(hostRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNewEventUseCase(hostRepository: HostRepository): NewEventUseCase {
-        return NewEventUseCase(hostRepository)
+    fun provideGetEventsUseCase(eventRepository: EventRepository): GetEventsUseCase {
+        return GetEventsUseCase(eventRepository)
     }
 
     @Provides
@@ -55,5 +37,17 @@ class UseCasesModule {
     @Singleton
     fun provideAttendEventUseCase(hostRepository: HostRepository): AttendEventUseCase {
         return AttendEventUseCase(hostRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFollowedHostsUseCase(hostRepository: HostRepository): GetFollowedHostsUseCase {
+        return GetFollowedHostsUseCase(hostRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteHostUseCase(hostRepository: HostRepository): DeleteHostUseCase {
+        return DeleteHostUseCase(hostRepository)
     }
 }

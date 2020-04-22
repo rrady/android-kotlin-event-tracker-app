@@ -4,7 +4,8 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import javax.inject.Inject
+import dagger.android.support.DaggerAppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,15 +19,14 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.eventtracker.app.R
 import com.eventtracker.app.ui.MainActivity
 
-class SignInActivity: AppCompatActivity() {
+class SignInActivity: DaggerAppCompatActivity() {
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in_activity)
-
-        firebaseAuth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.client_id))
@@ -49,7 +49,7 @@ class SignInActivity: AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                Log.w(ContentValues.TAG,"Google sign in failed:(")
+                Log.w(ContentValues.TAG,"Google sign in failed :(")
             }
         }
     }
